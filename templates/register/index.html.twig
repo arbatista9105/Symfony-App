@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+    <div class="container">
+        <div class="row h-50 justify-content-center align-items-center">
+             <div class="col-4 rounded my-1 p-2 bg-light text-dark">
+                <h2>Registro</h2>
+                 <div class=" container my-3 ">
+                     {% for flash_message in app.session.flashbag.get('error') %}
+                         <div class="alert alert-danger">
+                             {{ flash_message }}
+                         </div>
+                     {% endfor %}
+                 </div>
+                 <div class=" container my-3 ">
+                     {% for flash_message in app.session.flashbag.get('error_country') %}
+                         <div class="alert alert-danger">
+                             {{ flash_message }}
+                         </div>
+                     {% endfor %}
+                 </div>
+                {{ form(RegisterUserForm) }}
+                 <a href="login">Acceder</a>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

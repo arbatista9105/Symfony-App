@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Usuario{% endblock %}
+
+{% block body %}
+    <h1>Usuario</h1>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ user.name }}</td>
+            </tr>
+            <tr>
+                <th>Apellidos</th>
+                <td>{{ user.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Cédula</th>
+                <td>{{ user.dni }}</td>
+            </tr>
+            <tr>
+                <th>País</th>
+                <td>{{ user.country ? user.country|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Correo</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="container m-0">
+        <div class="row">
+            <div class="col-md-1">
+                <a class="btn btn-primary" href="{{ path('app_user_index') }}">Atras</a>
+            </div>
+            <div class="col-md-1">
+                <a class="btn btn-primary" href="{{ path('app_user_edit', {'id': user.id}) }}">Editar</a>
+            </div>
+            <div class="col-md-1">
+                {{ include('user/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

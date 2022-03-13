@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo Usuario{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row h-50 justify-content-center align-items-center">
+            <div class="col-4 rounded my-1 p-2 bg-light text-dark">
+                <h1>Nuevo Usuario</h1>
+                <div class=" container my-3 ">
+                    {% for flash_message in app.session.flashbag.get('error_country') %}
+                        <div class="alert alert-danger">
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+                </div>
+                {{ include('user/_form.html.twig')}}
+                <a class="btn btn-primary" href="{{ path('app_user_index') }}">Atras</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

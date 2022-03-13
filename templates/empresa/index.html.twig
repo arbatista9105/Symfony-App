@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Empresa{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a id="perfil" class="nav-link " aria-current="page" href="{{ path('app_perfil') }}">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  id="usuario" class="nav-link " aria-current="page" href="{{ path('app_user_index')  }}">Usuario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="banco" class="nav-link" aria-current="page" href="{{ path('app_banco_index')  }}">Banco</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="empresa" class="nav-link active" aria-current="page" href="{{ path('app_empresa_index')  }}">Empresa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <h1>Empresa</h1>
+    <div class="container m-0">
+        <a class="btn btn-primary"  href="{{ path('app_empresa_new') }}">Adicionar</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for empresa in paginator %}
+            <tr>
+                <td>{{ empresa.name }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('app_empresa_show', {'id': empresa.id}) }}">Mostrar</a>
+                    <a class="btn btn-primary" href="{{ path('app_empresa_edit', {'id': empresa.id}) }}">Editar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">No ahi registros</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {# display navigation #}
+    <nav>
+        {#<ul class="pagination justify-content-center">#}
+        {#<h7>Total de elementos:</h7>#}
+        {#{{ paginator.getTotalItemCount }}#}
+        {#</ul>#}
+        <ul class="pagination justify-content-center">
+            {{ knp_pagination_render(paginator) }}
+        </ul>
+    </nav>
+
+{% endblock %}

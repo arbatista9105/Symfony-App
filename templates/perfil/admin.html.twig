@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block body %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a id="perfil" class="nav-link active" aria-current="page" href="{{ path('app_perfil') }}">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  id="usuario" class="nav-link" aria-current="page" href="{{ path('app_user_index')  }}">Usuario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="banco" class="nav-link" aria-current="page" href="{{ path('app_banco_index')  }}">Banco</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="empresa" class="nav-link" aria-current="page" href="{{ path('app_empresa_index')  }}">Empresa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+  <div class="card mb-4 my-4" style="max-width: 70%;">
+    <div class="row no-gutters">
+      <div class="col-md-3">
+        <img src="{{ asset('images/pngegg.png') }}" class="card-img-top" alt="...">
+      </div>
+      <div class="col-md-9">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-7">
+               <h5 class="card-title">Usuario: {{ user.email }}</h5>
+            </div>
+            <div class="col-md-5">
+                <a href="logout" class="btn btn-primary" >Cerrar sesión</a>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="col-md-3 mt-2">
+                    <a href="{{  path('app_user_index') }}" class="btn btn-primary" >Administrar Usuarios</a>
+                  </div>
+                  <div class="col-md-3 mt-2">
+                    <a href="{{  path('app_banco_index') }}" class="btn btn-primary" >Administrar Bancos</a>
+                  </div>
+                  <div class="col-md-3 mt-2">
+                    <a href="{{  path('app_empresa_index') }}" class="btn btn-primary" >Administrar Empresas</a>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Nombre: {{ user.name }}</li>
+            <li class="list-group-item">Apellidos: {{ user.lastname }} </li>
+            <li class="list-group-item">Cédula: {{ user.dni }} </li>
+            <li class="list-group-item">Pais: {{ user.country }} </li>
+            <li class="list-group-item">Correo: {{ user.email }} </li>
+            <a href="{{ user.id }}/edit" class="btn btn-primary">Editar</a>
+            <a href="{{  user.id}}/edit_passw" class="btn btn-primary mt-2">Cambiar Contraseña</a>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

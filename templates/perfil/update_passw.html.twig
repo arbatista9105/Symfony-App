@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Contraseña{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row h-50 justify-content-center align-items-center">
+            <div class="col-4 rounded my-1 p-2 bg-light text-dark">
+                <h2>Editar</h2>
+                {{ form(form, { 'method': 'POST' }) }}
+                <div class=" container my-3 ">
+                    {% for flash_message in app.session.flashbag.get('error') %}
+                        <div class="alert alert-danger">
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <a class="btn btn-primary" href="{{ path('app_perfil') }}">Atras</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

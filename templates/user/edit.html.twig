@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Usuario{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row h-50 justify-content-center align-items-center">
+            <div class="col-4 rounded my-1 p-2 bg-light text-dark">
+                <h1>Editar Usuario</h1>
+                <div class=" container my-3 ">
+                    {% for flash_message in app.session.flashbag.get('error_country') %}
+                        <div class="alert alert-danger">
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+                </div>
+                {{ include('user/_form.html.twig', {'button_label': 'Editar'}) }}
+                    <div class="row">
+                        <div class="col-md-2">
+                            <a class="btn btn-primary" href="{{ path('app_user_index') }}">Atras</a>
+                        </div>
+                        <div class="col">
+                            {{ include('user/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

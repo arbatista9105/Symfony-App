@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adicionar Banco{% endblock %}
+
+{% block body %}
+
+
+    <div class="container mt-4">
+        <div class="row h-50 justify-content-center align-items-center">
+            <div class="col-4 rounded my-1 p-2 bg-light text-dark">
+                <h1>Adicionar Banco</h1>
+                {{ include('banco/_form.html.twig') }}
+                <a class="btn btn-primary" href="{{ path('app_banco_index') }}">Atras</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
