@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -14,11 +15,33 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
-use Symfony\Component\Validator\Constraints\Regex;
+
 
 class User1Type extends AbstractType
 {
+    private function getPaisApi(): array {
+
+        //api res pais
+
+        try {
+            $json = json_decode( file_get_contents('https://restcountries.com/v2/all?fields=name,alpha2Code'),true);
+            $cadena = array();
+            foreach ($json as $value) {
+                array_push($cadena,$value['name'] . ', ' . $value['alpha2Code']);
+            }
+            return $cadena;
+        } catch (\TypeError $e) {
+//              print_r("Error: " . $e->getMessage() . PHP_EOL) ;
+            throw new Exception("Error de conexión con la api de país. Revise la conexión a internet y recarge la página. Si el error persiste contacte con el admin del sistema. ") ;
+
+        } catch (\ErrorException  $e) {
+//              print_r("Error: " . $e->getMessage() . PHP_EOL) ;
+              throw new Exception("Error de conexión con la api res de país. Revise la conexión a internet y recarge la página. Si el error persiste contacte con el admin del sistema. ") ;
+
+        }
+
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -41,13 +64,13 @@ class User1Type extends AbstractType
                 ],
                 'label' => 'Cédula'
             ])
-            ->add('country',ChoiceType::class,  [
-                'choices' => [
-                    'Seleccione el país' =>  null,
-                    'Cuba'               => 'Cuba',
-                    'Canada'             => 'Canada'
-                ],
+            ->add('country',ChoiceType::class, [
+                'choices' => $this->getPaisApi(),
+                'choice_label' => function ($value) {
+                    return $value;
+                },
                 'label' => 'País'
+
             ])
             ->add('email', EmailType::class, [
                     'constraints' => [
@@ -71,7 +94,9 @@ class User1Type extends AbstractType
                 'label' => 'Confirmar Contraseña'
             ])
             ->add('Guardar', SubmitType::class);
+
     }
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {

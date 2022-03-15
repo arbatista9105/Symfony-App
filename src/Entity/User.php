@@ -86,7 +86,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string',length: 11, unique: true)]
     private $dni;
 
-    #[ORM\Column(type: 'json')]
+    #[ORM\Column(type: 'string')]
     /**
      * @Assert\Regex(
      *     pattern="/\d/",
@@ -94,7 +94,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *     message="El país no puede contener número"
      * )
      */
-    private $country = [];
+    private $country;
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
@@ -227,6 +227,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @see UserInterface
      */
     public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    public function getUserName(): string
     {
         return (string) $this->email;
     }

@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
 
 class LoginController extends AbstractController
 {
@@ -35,4 +35,15 @@ class LoginController extends AbstractController
         // controller can be blank: it will never be called!
         throw new \Exception('Don\'t forget to activate logout in security.yaml');
     }
+
+
+    /**
+     * @Route("/api", name="api_login", methods={"GET"})
+     */
+    public function api()
+    {
+        $user = new User();
+        return new Response(sprintf('Logged in as %s:',$user->getUserIdentifier()));
+    }
+
 }
