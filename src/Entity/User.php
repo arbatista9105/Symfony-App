@@ -8,8 +8,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ApiResource]
 #[UniqueEntity(fields: ['email'], message: 'Ya existe una cuenta de usuario con dicho correo')]
 #[UniqueEntity(fields: ['dni'], message: 'Ya existe una cuenta de usuario con dicho carnet de identidad')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -101,11 +103,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     #[ORM\ManyToOne(targetEntity: Banco::class)]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: true,referencedColumnName: 'id')]
     private $banco;
 
     #[ORM\ManyToOne(targetEntity: Empresa::class)]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: true,referencedColumnName: 'id')]
     private $empresa;
     /**
      * @return mixed

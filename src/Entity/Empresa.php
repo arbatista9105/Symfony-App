@@ -27,23 +27,6 @@ class Empresa
     private $name;
 
 
-    /**
-     * @return mixed
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param mixed $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-
-
     public function getId(): ?int
     {
         return $this->id;

@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class LoginController extends AbstractController
+class LoginController extends ApiController
 {
     #[Route('/login', name: 'login')]
      public function index(AuthenticationUtils $authenticationUtils): Response
@@ -38,12 +40,13 @@ class LoginController extends AbstractController
 
 
     /**
-     * @Route("/api", name="api_login", methods={"GET"})
+     * @param UserInterface $user
+     * @param JWTTokenManagerInterface $JWTManager
+     * @return JsonResponse
      */
-    public function api()
+    public function getTokenUser(UserInterface $user, JWTTokenManagerInterface $JWTManager)
     {
-        $user = new User();
-        return new Response(sprintf('Logged in as %s:',$user->getUserIdentifier()));
+        return new JsonResponse(['token' => $JWTManager->create($user)]);
     }
 
 }

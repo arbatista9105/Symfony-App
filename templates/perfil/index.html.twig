@@ -34,7 +34,35 @@
             <div class="col-md-5">
                 <a href="logout" class="btn btn-primary" >Cerrar sesión</a>
             </div>
+            <div class="mt-2">
+              <h5 >API y JWT:</h5>
+              <h6>Enlaces:</h6>
+              <h7>JWT Login: <br></h7>
+              <h8> http://127.0.0.1:8000/api/login_check<br></h8>
+              <h7>API:<br></h7>
+              <h8> http://127.0.0.1:8000/api/res/user/all</h8>
+              <p>Nota: Antes de acceder debe primero generar un token de acceso para poder acceder a dicha
+                Api mediante el uso de curl, postman, insomnia, etc. La duración del token ha sido modificado a 2 min<br> por lo que al pasar dicho tiempo debe generar uno nuevo.
+              </p>
+              <h7>Ejemplo empleando curl: <br> </h7>
+              <h8>Como obtener el token:<br></h8>
+              <h8> $ curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8000/api/login_check -d '{"email":"Su correo","password":"Su contraseña"}' <br></h8>
+              <h8>Respuesta: Un json con el Token de la forma: { "token": "[TOKEN]" }<br></h8>
+              <h8>Como acceder al api con el token generado:<br></h8>
+              <h8>$ curl -H "Authorization: Bearer [TOKEN]" http://127.0.0.1:8000/api/res/user/all <br></h8>
+              <h8>Respuesta: Un json con el listado de los usuarios de la forma:
+                {"code": "codigo",
+                "message": "memsaje de notificación",
+                "data": [
+                {
+                "Nombre": "Nombre del usuario",
+                "Apellidos": "Apellidos del usuario",
+                "Cêdula": "Cédula del usuario",
+                "Correo": "Correo del usuario"
+                }]},<br></h8>
+            </div>
           </div>
+        </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Nombre: {{ user.name }}</li>
             <li class="list-group-item">Apellidos: {{ user.lastname }} </li>
@@ -44,7 +72,6 @@
             <a href="{{ user.id }}/edit" class="btn btn-primary">Editar</a>
             <a href="{{  user.id}}/edit_passw" class="btn btn-primary mt-2">Cambiar Contraseña</a>
           </ul>
-        </div>
       </div>
     </div>
   </div>

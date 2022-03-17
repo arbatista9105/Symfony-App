@@ -32,22 +32,6 @@ class Banco
         return $this->id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param mixed $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-
     public function getName(): ?string
     {
         return $this->name;
